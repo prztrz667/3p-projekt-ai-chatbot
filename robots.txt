@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Allow: /PHOTO/
+Allow: *.js
+Disallow: /admin/
+Disallow: /temp/
+Disallow: /cache/
+
+# Google Bot - zezwolenie na indeksowanie skryptów
+User-agent: Googlebot
+Allow: /
+Allow: *.js
+Allow: *.css
+
+# Sitemaps - kluczowe dla szybkiej indeksacji
+Sitemap: https://3p-projekt.pl/sitemap.xml
+Sitemap: https://3p-projekt.pl/sitemap-blog.xml
+Sitemap: https://3p-projekt.pl/sitemap-images.xml
+
+Host: https://3p-projekt.pl
+
+# Crawl-delay dla oszczędzenia zasobów serwera
+Crawl-delay: 1

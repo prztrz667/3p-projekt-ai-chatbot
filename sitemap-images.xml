@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Main Page Images -->
+  <url>
+    <loc>https://3p-projekt.pl/</loc>
+    <image:image>
+      <image:loc>https://3p-projekt.pl/PHOTO/logo.png</image:loc>
+      <image:title>Logo 3P PROJEKT</image:title>
+      <image:caption>Profesjonalne meble na wymiar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://i.postimg.cc/d1NQTy6s/Chat_GPT_Image_13_sty_2026_11_51_48.png</image:loc>
+      <image:title>3P PROJEKT Hero Image</image:title>
+      <image:caption>Meble na wymiar - kuchnie, szafy, garderoby</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Blog Images -->
+  <url>
+    <loc>https://3p-projekt.pl/blog.html</loc>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/meble_na_wymiar_oswiecim_cennik_kuchni.webp</image:loc>
+      <image:title>Kuchnie na wymiar</image:title>
+      <image:caption>Blog - Jak zaplanować kuchnię</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_szafy.png</image:loc>
+      <image:title>Szafy wnękowe</image:title>
+      <image:caption>Blog - Szafy wnękowe na wymiar</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_trendy.png</image:loc>
+      <image:title>Trendy w designie</image:title>
+      <image:caption>Blog - Trendy mebli 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_oswietlenie.png</image:loc>
+      <image:title>Oświetlenie LED</image:title>
+      <image:caption>Blog - Oświetlenie w meblach</image:caption>
+    </image:image>
+  </url>
+  
+</urlset>

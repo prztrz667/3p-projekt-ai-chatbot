@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://3p-projekt.pl/</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://3p-projekt.pl/PHOTO/logo.png</image:loc>
+      <image:title>3P PROJEKT - Meble na wymiar</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Blog Hub -->
+  <url>
+    <loc>https://3p-projekt.pl/blog.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://3p-projekt.pl/PHOTO/logo.png</image:loc>
+      <image:title>Strefa Porad – Blog 3P PROJEKT</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Blog Post 1: Kitchen Planning -->
+  <url>
+    <loc>https://3p-projekt.pl/post-1.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/meble_na_wymiar_oswiecim_cennik_kuchni.webp</image:loc>
+      <image:title>Jak zaplanować idealną kuchnię na wymiar</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Blog Post 2: Wardrobes -->
+  <url>
+    <loc>https://3p-projekt.pl/post-2.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_szafy.png</image:loc>
+      <image:title>Szafy wnękowe na wymiar</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Blog Post 3: Design Trends -->
+  <url>
+    <loc>https://3p-projekt.pl/post-3.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_trendy.png</image:loc>
+      <image:title>Trendy w designie mebli 2026</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Blog Post 4: LED Lighting -->
+  <url>
+    <loc>https://3p-projekt.pl/post-4.html</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://hosting2642078.online.pro/PHOTO/blog_oswietlenie.png</image:loc>
+      <image:title>Oświetlenie w meblach na wymiar</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+  
+</urlset>

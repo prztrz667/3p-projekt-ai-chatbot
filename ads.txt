@@ -1,0 +1,16 @@
+# 3P PROJEKT - Authorized Sellers of Digital Media
+# This file specifies authorized sellers of inventory for this domain.
+# https://iabtechlab.com/ads-txt/
+# Last Updated: 2026-01-19
+
+# Direct Seller
+google.com, pub-xxxxxxxxxxxxxxxx, DIRECT, f08c47fec0942fa0
+
+# AdSense
+google.com, ca-pub-xxxxxxxxxxxxxxxx, RESELLER, f08c47fec0942fa0
+
+# Fallback
+google.com, pub-xxxxxxxxxxxxxxxx, RESELLER
+
+# Note: Replace placeholder publisher IDs with actual Google AdSense/AdManager IDs
+# Format: DOMAIN, SELLER_ACCOUNT_ID, ACCOUNT_TYPE, VERIFICATION_CODE

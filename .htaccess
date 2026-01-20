@@ -1,0 +1,151 @@
+# ====================================================================
+# 3P PROJEKT SEO & SECURITY OPTIMIZATION
+# Apache Configuration for Enhanced SEO Rankings
+# ====================================================================
+
+# HTTPS Redirect
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
+  # Remove trailing slashes (except directories)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [L,R=301]
+  
+  # Block access to sensitive files
+  RewriteRule ^(.env|composer.json|.git|.htaccess)$ - [F]
+</IfModule>
+
+# ====================================================================
+# SECURITY HEADERS (Essential for SEO Trust)
+# ====================================================================
+
+<IfModule mod_headers.c>
+  # HSTS - Force HTTPS for 1 year + subdomains + preload
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  
+  # X-Content-Type-Options - Prevents MIME sniffing
+  Header always set X-Content-Type-Options "nosniff"
+  
+  # X-Frame-Options - Prevents Clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+  
+  # X-XSS-Protection - XSS Protection
+  Header always set X-XSS-Protection "1; mode=block"
+  
+  # Referrer-Policy - Controls referrer information
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Permissions-Policy - Disable unnecessary features
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  
+  # Content-Security-Policy (CSP) - XSS Prevention
+  Header always set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;"
+  
+  # Vary Header - For proxy caching
+  Header append Vary "Accept-Encoding"
+  
+  # X-Robots-Tag - Instructs search engines
+  Header set X-Robots-Tag "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+</IfModule>
+
+# ====================================================================
+# GZIP COMPRESSION (Performance = Rankings)
+# ====================================================================
+
+<IfModule mod_deflate.c>
+  # HTML
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  
+  # CSS & JavaScript
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  
+  # XML & JSON
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/json
+  
+  # SVG
+  AddOutputFilterByType DEFLATE image/svg+xml
+  
+  # Don't compress already compressed files
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|zip)$ no-gzip dont-vary
+  
+  # Don't compress for old browsers
+  BrowserMatch ^Mozilla/4 no-gzip
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
+# ====================================================================
+# CACHE CONTROL (Expires Headers)
+# ====================================================================
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # HTML - Short cache (1 hour for updates)
+  ExpiresByType text/html "access plus 1 hour"
+  
+  # CSS & JavaScript - Long cache (1 month)
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  
+  # Images - 6 months
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/gif "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/x-icon "access plus 6 months"
+  
+  # Fonts - 1 year
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  
+  # Media - 6 months
+  ExpiresByType video/mp4 "access plus 6 months"
+  ExpiresByType audio/mpeg "access plus 6 months"
+  
+  # Default
+  ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# ====================================================================
+# CHARACTER ENCODING (UTF-8)
+# ====================================================================
+
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .xml .json .rdf .xhtml
+
+# ====================================================================
+# DISABLE DIRECTORY LISTING (Security)
+# ====================================================================
+
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# ====================================================================
+# ETAG OPTIMIZATION
+# ====================================================================
+
+<IfModule mod_headers.c>
+  # Remove ETags to prevent cache revalidation
+  Header unset ETag
+  FileETag None
+</IfModule>

@@ -1,0 +1,32 @@
+/* Overrides to prevent CLS for video containers */
+#diy-projects .video-wrapper {
+  position: relative;
+  margin: 40px auto 0;
+  border-radius: 12px;
+  max-width: 1000px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  #diy-projects .video-wrapper {
+    margin: 20px auto 0;
+    aspect-ratio: 16/9;
+  }
+}
+
+@media (max-width: 480px) {
+  #diy-projects .video-wrapper {
+    margin: 15px auto 0;
+    aspect-ratio: 16/9;
+  }
+}
+
+@media (max-width: 900px) {
+  #diy-projects .video-wrapper {
+    margin: -40px auto 0;
+    aspect-ratio: 16/9;
+  }
+}

@@ -1,0 +1,152 @@
+================================================================================
+ARKUSZ DANYCH TRENINGOWYCH (KNOWLEDGE BASE) – 3P PROJEKT
+================================================================================
+
+1. INFORMACJE O FIRMIE I LOKALIZACJI
+================================================================================
+
+Nazwa: 3P PROJEKT
+Lokalizacja: Oświęcim, woj. małopolskie
+Obszar działania: Oświęcim, Małopolska, Śląsk
+
+KONTAKT:
+  Telefon: 510 346 330
+  Email: kontakt@3p-projekt.pl
+  Godziny pracy: Poniedziałek – Piątek: 08:00 – 18:00
+
+SIEĆ WEB:
+  Strona główna: https://3p-projekt.pl
+  Blog: https://3p-projekt.pl/blog.html
+
+
+2. OFERTA I SPECJALIZACJA
+================================================================================
+
+GŁÓWNE USŁUGI:
+  • Meble na wymiar (nowoczesne kuchnie, szafy wnękowe, garderoby)
+  • Projekty funkcjonalne dopasowane do stylu życia
+  • Wizualizacje 3D (darmowe)
+  • Projekty DIY (dla majsterkowiczów)
+  • Montaż profesjonalny
+
+CHARAKTERYSTYKA USŁUG:
+  
+  Wizualizacje 3D:
+    - Darmowe dla wszystkich klientów
+    - Realistyczny podgląd projektu
+    - Przed przystąpieniem do produkcji
+  
+  Projekty DIY:
+    - Dla osób chcących samodzielnie wykonać meble
+    - Zawierają: wizualizację 3D, listę formatek z otworami technologicznymi,
+      zestawienie materiałów i okuć, instrukcję montażu
+    - Oszczędność na montażu przy zachowaniu profesjonalnego projektu
+  
+  Czas Realizacji:
+    - Zazwyczaj 4-8 tygodni od zatwierdzenia projektu
+
+
+3. PROCES WSPÓŁPRACY (SCENARIUSZ DLA AI BOTA)
+================================================================================
+
+KROK 1 – POMIAR POMIESZCZENIA:
+  • Klient pobiera instrukcję "Krok 1-3"
+  • Instrukcja zawiera:
+    - Rzut z góry (ogólne gabaryty, okna, drzwi)
+    - Instalacje (elektryka, woda, gaz, kanalizacja, wysokości)
+    - Widok każdej ściany (wysokości, skosy, belki)
+  • Wymiary podawane w milimetrach (mm)
+
+KROK 2 – PROJEKT FUNKCJONALNY:
+  • Tworzymy projekt na podstawie pomiarów
+  • Dopasowujemy do stylu życia klienta
+  • Uwzględniamy przeszkody i instalacje
+  • Prezentujemy darmową wizualizację 3D
+
+KROK 3 – REALIZACJA:
+  • Produkcja mebli
+  • Montaż profesjonalny (lub opcja DIY)
+  • Czasami: 4-8 tygodni
+
+
+4. NAJCZĘSTSZE PYTANIA (FAQ) – ODPOWIEDZI DLA BOTA
+================================================================================
+
+P: "Ile kosztują meble na wymiar?"
+O: "Cena zależy od wymiarów, materiałów (fronty, blacie, systemy) i wyposażenia.
+   Oferujemy bezpłatną wycenę na podstawie Twoich dokładnych wymiarów.
+   Skontaktuj się: 510 346 330 lub kontakt@3p-projekt.pl"
+
+P: "W jakim obszarze działacie?"
+O: "Działamy w Oświęcimiu i okolicznych miejscowościach: Małopolska i Śląsk.
+   Zajmujemy się projektowaniem i montażem mebli na całym tym terenie."
+
+P: "Czy mogę zmontować meble sam?"
+O: "Tak! Przygotowujemy pełną dokumentację techniczną i projekt wykonawczy.
+   Otrzymasz listę formatek z otworami, zestawienie materiałów i instrukcję montażu.
+   To świetny sposób, aby oszczędzić na usłudze montażu."
+
+P: "Czy oferujecie wizualizację 3D?"
+O: "Oczywiście! Wizualizacja 3D jest darmowa dla wszystkich klientów.
+   Zobaczysz realny podgląd Twojej kuchni/szafy zanim przystąpimy do produkcji."
+
+P: "Jak długo trwa realizacja?"
+O: "Zazwyczaj 4-8 tygodni od zatwierdzenia projektu, w zależności od złożoności
+   i dostępności materiałów."
+
+P: "Jakie materiały oferujecie?"
+O: "Pracujemy z wysokiej jakości materiałami:
+   - Fronty: lakierowane matowe, połysk, naturalne drewno
+   - Blaty: laminaty, spieki kwarcowe, granity
+   - Systemy: ciche domyki, prowadnice cargo, funkcjonalne rozwiązania"
+
+
+5. SŁOWA KLUCZOWE DLA BOTA (Pattern Matching)
+================================================================================
+
+KUCHNIA:
+  - "kuchnia", "meble kuchenne", "zabudowa", "zmywarką", "indukcja", "spożywcze"
+
+SZAFA/GARDEROBA:
+  - "szafa", "garderoba", "szafy wnękowe", "przedpokój", "sypialnia", "szafa przesuwna"
+
+WYMIARY/POMIAR:
+  - "wymiary", "pomiar", "mierzyć", "jak zmierzyć", "instrukcja", "mm"
+
+CENA/KOSZTY:
+  - "cena", "ile kosztuje", "wycena", "koszt", "budżet", "ceny"
+
+3D/WIZUALIZACJA:
+  - "3d", "wizualizacja", "projekt", "jak będzie wyglądać", "podgląd"
+
+DIY/SAMODZIELNIE:
+  - "diy", "sam", "samodzielnie", "montaż", "sam zmontować", "projekt wykonawczy"
+
+ZASIĘG/LOKALIZACJA:
+  - "Oświęcim", "Małopolska", "Śląsk", "gdzie działacie", "obszar", "zasięg"
+
+KONTAKT/SPOTKANIE:
+  - "zadzwoń", "telefon", "email", "kontakt", "umówić", "spotkanie", "wizyta"
+
+MATERIAŁY/SYSTEMY:
+  - "materiały", "fronty", "blaty", "lakier", "naturalne drewno", "granit", "systemy"
+
+
+6. INSTRUKCJE DLA BOTA
+================================================================================
+
+OGÓLNE ZASADY:
+  ✓ Zawsze bądź pomocny i profesjonalny
+  ✓ Odpowiadaj konkretnie na pytania
+  ✓ W razie wątpliwości, zaproponuj kontakt z firmą
+  ✓ Nie wymyślaj informacji – bazuj na Knowledge Base
+  ✓ Zachęcaj do pobrania instrukcji "Krok 1-3"
+  ✓ Promuj darmową wizualizację 3D
+
+REKOMENDACJE FOLLOW-UP:
+  • Po odpowiedzi o wymiarzach: zaproponuj pobranie instrukcji
+  • Po pytaniu o cenę: zasugeruj bezpłatną wycenę i kontakt
+  • Po pytaniu o kuchnię/szafę: zapytaj o wymiary
+  • Po pytaniu o DIY: wyjaśnij, że dokumentacja zawiera wszystko
+
+================================================================================

@@ -1,0 +1,10 @@
+# 3P PROJEKT - App Ads.txt
+# Authorized sellers of digital media for mobile apps
+# https://iabtechlab.com/ads-txt/
+# Last Updated: 2026-01-19
+
+# If you operate mobile applications, add authorized sellers here
+# Format: DOMAIN, SELLER_ACCOUNT_ID, ACCOUNT_TYPE, VERIFICATION_CODE
+
+# Example:
+# google.com, pub-xxxxxxxxxxxxxxxx, DIRECT, f08c47fec0942fa0

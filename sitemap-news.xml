@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- Latest Blog Posts for News Index -->
+  <url>
+    <loc>https://3p-projekt.pl/blog.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>3P PROJEKT Blog</news:name>
+        <news:language>pl</news:language>
+      </news:publication>
+      <news:publication_date>2026-01-19T10:00:00Z</news:publication_date>
+      <news:title>Strefa Porad – Najnowsze artykuły o meblach na wymiar</news:title>
+      <news:keywords>meble na wymiar, kuchnie, szafy, design mebli</news:keywords>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://3p-projekt.pl/post-1.html</loc>
+    <news:news>
+      <news:publication>
+        <news:name>3P PROJEKT Blog</news:name>
+        <news:language>pl</news:language>
+      </news:publication>
+      <news:publication_date>2026-01-19T09:00:00Z</news:publication_date>
+      <news:title>Jak zaplanować idealną kuchnię na wymiar?</news:title>
+      <news:keywords>planowanie kuchni, kuchnie na wymiar, poradnik</news:keywords>
+    </news:news>
+  </url>
+  
+</urlset>

@@ -93,7 +93,20 @@
     <h1>Meble na wymiar Oświęcim – 3P PROJEKT</h1>
     <h2>Kuchnie, szafy i garderoby na zamówienie</h2>
     <p>Kuchnie • Szafy • Garderoby – Oświęcim i okolice</p>
-    <a href="#contact" class="btn-main">Bezpłatna wycena</a>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-main">Bezpłatna wycena</a>
+      <a href="/booking.html" class="btn-booking">📅 Umów się na spotkanie</a>
+    </div>
+    
+    <!-- BOOKING BANNER -->
+    <div class="booking-banner">
+      <div class="banner-icon">⏰</div>
+      <div class="banner-content">
+        <strong>Chcesz umówić się na konsultację?</strong>
+        <p>Wybierz wygodny dla Ciebie termin od poniedziałku do soboty 9:00-20:00</p>
+      </div>
+      <a href="/booking.html" class="banner-btn">Rezerwuj teraz →</a>
+    </div>
   </div>
   <div class="scroll-down">↓</div>
 </section>
@@ -758,6 +771,122 @@
   box-shadow: 0 12px 35px rgba(200, 154, 90, 0.6);
 }
 
+/* HERO BUTTONS LAYOUT */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.btn-booking {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #d4af37, #c89a5a);
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 2px solid #d4af37;
+  font-size: 16px;
+  box-shadow: 0 8px 20px rgba(200, 154, 90, 0.3);
+}
+
+.btn-booking:hover {
+  background: linear-gradient(135deg, #c89a5a, #b8860f);
+  border-color: #c89a5a;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(200, 154, 90, 0.5);
+}
+
+.btn-booking:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* BOOKING BANNER */
+.booking-banner {
+  margin-top: 40px;
+  padding: 25px 30px;
+  background: linear-gradient(135deg, rgba(200, 154, 90, 0.15), rgba(212, 175, 55, 0.1));
+  border: 2px solid rgba(200, 154, 90, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.banner-icon {
+  font-size: 2.5em;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.banner-content {
+  flex: 1;
+  text-align: left;
+}
+
+.banner-content strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.banner-content p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.banner-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--gold);
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.banner-btn:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.banner-btn:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* STICKY CONTACT Z-INDEX FIX */
+.sticky-contact {
+  z-index: 1000 !important;
+}
+
 @media (max-width: 768px) {
   .floating-booking-btn {
     bottom: 20px;
@@ -771,6 +900,30 @@
     width: 160px;
     height: 65px;
     border-radius: 32px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .booking-banner {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .banner-content {
+    text-align: center;
+  }
+  
+  .banner-content strong {
+    font-size: 14px;
+  }
+  
+  .banner-content p {
+    font-size: 12px;
   }
 }
 </style>

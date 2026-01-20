@@ -56,6 +56,16 @@ async function sendEmail(to, subject, html) {
   return true;
 }
 
+// Helper function
+function getMeetingTypeLabel(type) {
+  const labels = {
+    'telefon': '📞 Telefonicznie',
+    'online': '💻 Online (Zoom/Teams)',
+    'stacjonarnie': '🏢 Stacjonarnie'
+  };
+  return labels[type] || type;
+}
+
 // === AI CHATBOT - PATTERN MATCHING ===
 app.post('/api/chat', (req, res) => {
   try {
@@ -133,9 +143,9 @@ app.post('/api/chat', (req, res) => {
 // POST /api/booking - nowa rezerwacja
 app.post('/api/booking', upload.single('file'), async (req, res) => {
   try {
-    const { firstName, lastName, address, email, phone, projectType, description, date, time } = req.body;
+    const { firstName, lastName, address, email, phone, projectType, meetingType, description, date, time } = req.body;
 
-    if (!firstName || !lastName || !email || !phone || !date || !time) {
+    if (!firstName || !lastName || !email || !phone || !date || !time || !meetingType) {
       return res.status(400).json({ error: 'Brakuje wymaganych pól' });
     }
 
@@ -148,6 +158,7 @@ app.post('/api/booking', upload.single('file'), async (req, res) => {
       email,
       phone,
       projectType,
+      meetingType,
       description,
       date,
       time: parseInt(time),
@@ -176,6 +187,7 @@ app.post('/api/booking', upload.single('file'), async (req, res) => {
           <p>👤 Imię i nazwisko: <strong>${firstName} ${lastName}</strong></p>
           <p>📍 Adres: <strong>${address}</strong></p>
           <p>📞 Telefon: <strong>${phone}</strong></p>
+          <p>💻 Typ spotkania: <strong>${getMeetingTypeLabel(meetingType)}</strong></p>
           <p>🏗️ Typ projektu: <strong>${projectType}</strong></p>
         </div>
 
@@ -199,6 +211,7 @@ app.post('/api/booking', upload.single('file'), async (req, res) => {
           <p>📧 Email: <strong>${email}</strong></p>
           <p>📞 Telefon: <strong>${phone}</strong></p>
           <p>📍 Adres: <strong>${address}</strong></p>
+          <p>💻 Typ spotkania: <strong>${getMeetingTypeLabel(meetingType)}</strong></p>
           <p>🏗️ Projekt: <strong>${projectType}</strong></p>
           <p>📝 Opis: <strong>${description}</strong></p>
         </div>

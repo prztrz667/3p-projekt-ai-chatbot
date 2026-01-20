@@ -246,6 +246,34 @@
       box-shadow: 0 0 10px rgba(200, 154, 90, 0.3);
     }
 
+    /* Improved select dropdown styling */
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c89a5a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      background-size: 20px;
+      padding-right: 35px;
+      cursor: pointer;
+    }
+
+    .form-group select option {
+      background: #2a2a2a;
+      color: #fff;
+      padding: 8px;
+    }
+
+    .form-group select option:hover {
+      background: #c89a5a;
+      color: #000;
+    }
+
+    .form-group select option:checked {
+      background: linear-gradient(#c89a5a, #c89a5a);
+      background-color: #c89a5a;
+      color: #000;
+    }
+
     .form-group textarea {
       resize: vertical;
       min-height: 100px;
@@ -497,15 +525,26 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="projectType">Typ projektu *</label>
-            <select id="projectType" name="projectType" required>
-              <option value="">-- Wybierz --</option>
-              <option value="kuchnia">Kuchnia na wymiar</option>
-              <option value="szafa">Szafa/Garderoba</option>
-              <option value="zabudowa">Zabudowa przedpokoju</option>
-              <option value="inne">Inne</option>
-            </select>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="meetingType">Typ spotkania *</label>
+              <select id="meetingType" name="meetingType" required>
+                <option value="">-- Wybierz --</option>
+                <option value="telefon">📞 Telefonicznie</option>
+                <option value="online">💻 Online (Zoom/Teams)</option>
+                <option value="stacjonarnie">🏢 Stacjonarnie (u klienta)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="projectType">Typ projektu *</label>
+              <select id="projectType" name="projectType" required>
+                <option value="">-- Wybierz --</option>
+                <option value="kuchnia">Kuchnia na wymiar</option>
+                <option value="szafa">Szafa/Garderoba</option>
+                <option value="zabudowa">Zabudowa przedpokoju</option>
+                <option value="inne">Inne</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-group">
@@ -669,6 +708,7 @@
       formData.append('email', document.getElementById('email').value);
       formData.append('phone', document.getElementById('phone').value);
       formData.append('projectType', document.getElementById('projectType').value);
+      formData.append('meetingType', document.getElementById('meetingType').value);
       formData.append('description', document.getElementById('description').value);
       formData.append('date', selectedDate.toISOString().split('T')[0]);
       formData.append('time', selectedTime);

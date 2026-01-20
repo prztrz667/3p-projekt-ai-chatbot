@@ -438,6 +438,7 @@
                 <th>Klient</th>
                 <th>Email</th>
                 <th>Telefon</th>
+                <th>Typ spotkania</th>
                 <th>Projekt</th>
                 <th>Status</th>
                 <th>Akcje</th>
@@ -537,6 +538,16 @@
     const API_URL = 'https://threep-projekt-ai-chatbot.onrender.com';
     let authToken = null;
 
+    // === HELPER FUNCTIONS ===
+    function getMeetingTypeLabel(type) {
+      const labels = {
+        'telefon': '📞 Telefonicznie',
+        'online': '💻 Online',
+        'stacjonarnie': '🏢 Stacjonarnie'
+      };
+      return labels[type] || type;
+    }
+
     // === LOGIN ===
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -606,6 +617,7 @@
           <td>${b.firstName} ${b.lastName}</td>
           <td>${b.email}</td>
           <td>${b.phone}</td>
+          <td>${getMeetingTypeLabel(b.meetingType)}</td>
           <td>${b.projectType}</td>
           <td><span style="color: ${b.status === 'confirmed' ? '#4caf50' : '#ff9800'}">${b.status === 'confirmed' ? '✓ Potwierdzona' : '⏳ Oczekuje'}</span></td>
           <td class="booking-actions">

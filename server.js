@@ -4,12 +4,15 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const { Resend } = require('resend');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'Przemek2191!';
 const ADMIN_PASSWORD = 'Przemek2191!';
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const resend = new Resend(RESEND_API_KEY);
 
 // Multer dla file uploads
 const upload = multer({ storage: multer.memoryStorage() });
@@ -51,9 +54,30 @@ function saveDatabase(data) {
 
 // === MAIL HELPER ===
 async function sendEmail(to, subject, html) {
-  console.log(`📧 Email do ${to}: ${subject}`);
-  // W przyszłości można dodać Resend lub inny serwis
-  return true;
+  try {
+    if (!RESEND_API_KEY) {
+      console.log(`📧 [MOCK] Email do ${to}: ${subject}`);
+      return true;
+    }
+
+    const response = await resend.emails.send({
+      from: 'noreply@3p-projekt.pl',
+      to: to,
+      subject: subject,
+      html: html
+    });
+
+    if (response.error) {
+      console.error('❌ Błąd wysyłania emaila:', response.error);
+      return false;
+    }
+
+    console.log(`✅ Email wysłany do ${to}: ${subject}`);
+    return true;
+  } catch (error) {
+    console.error('❌ Błąd sendEmail:', error);
+    return false;
+  }
 }
 
 // Helper function

@@ -6,7 +6,15 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// CORS configuration - pozwól na żądania z 3p-projekt.pl
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://3p-projekt.pl', 'https://www.3p-projekt.pl', 'https://threep-projekt-ai-chatbot.onrender.com'],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Statyczne pliki (HTML, CSS, JS)
@@ -64,6 +72,14 @@ Bądź pomocny, miły, polecaj kontakt telefoniczny, nie wymyślaj informacji, k
 
   } catch (error) {
     console.error('OpenAI API Error:', error.response?.data || error.message);
+    
+    // Szczegółowe logowanie dla debugowania
+    if (error.response?.status === 401) {
+      console.error('❌ Błąd autentykacji - sprawdź OPENAI_API_KEY');
+    } else if (error.code === 'ENOTFOUND') {
+      console.error('❌ Błąd sieci - sprawdź połączenie internetowe');
+    }
+    
     res.status(500).json({ 
       error: 'Błąd komunikacji z AI. Spróbuj ponownie.',
       details: error.message 

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umów się na spotkanie | 3P PROJEKT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .booking-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(35,35,35,0.95));
+      border: 2px solid #c89a5a;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #d4af37, #c89a5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 50px;
+      font-size: 1.1em;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    /* KALENDARZ */
+    .calendar-section h2 {
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+
+    .calendar-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(200, 154, 90, 0.1);
+      border-radius: 10px;
+    }
+
+    .calendar-nav button {
+      background: #c89a5a;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .calendar-nav button:hover {
+      background: #d4af37;
+      transform: scale(1.05);
+    }
+
+    .calendar-month {
+      color: #d4af37;
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .weekday {
+      text-align: center;
+      font-weight: 600;
+      color: #c89a5a;
+      padding: 10px;
+      font-size: 0.9em;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(200, 154, 90, 0.1);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+
+    .day:hover {
+      border-color: #c89a5a;
+      background: rgba(200, 154, 90, 0.2);
+      transform: scale(1.05);
+    }
+
+    .day.selected {
+      background: #c89a5a;
+      color: #000;
+      border-color: #d4af37;
+    }
+
+    .day.disabled {
+      color: #555;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .day.disabled:hover {
+      border-color: transparent;
+      background: rgba(200, 154, 90, 0.05);
+      transform: none;
+    }
+
+    /* GODZINY */
+    .hours-section {
+      margin-top: 30px;
+    }
+
+    .hours-section h3 {
+      color: #d4af37;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .hour {
+      padding: 12px;
+      background: rgba(200, 154, 90, 0.1);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .hour:hover {
+      border-color: #c89a5a;
+      background: rgba(200, 154, 90, 0.2);
+    }
+
+    .hour.selected {
+      background: #c89a5a;
+      color: #000;
+      border-color: #d4af37;
+    }
+
+    .hour.booked {
+      background: #555;
+      color: #999;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* FORMULARZ */
+    .form-section {
+      background: rgba(200, 154, 90, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(200, 154, 90, 0.2);
+    }
+
+    .form-section h2 {
+      color: #d4af37;
+      margin-bottom: 25px;
+      font-size: 1.3em;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #c89a5a;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(200, 154, 90, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #c89a5a;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 10px rgba(200, 154, 90, 0.3);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-upload input[type="file"] {
+      display: none;
+    }
+
+    .file-upload-btn {
+      display: block;
+      padding: 12px;
+      background: rgba(200, 154, 90, 0.2);
+      border: 2px dashed #c89a5a;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #c89a5a;
+      font-weight: 600;
+    }
+
+    .file-upload-btn:hover {
+      background: rgba(200, 154, 90, 0.3);
+      border-color: #d4af37;
+    }
+
+    .file-name {
+      color: #aaa;
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
+
+    /* SUMMARY */
+    .summary {
+      background: rgba(200, 154, 90, 0.1);
+      padding: 15px;
+      border-left: 4px solid #c89a5a;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .summary-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-label {
+      color: #aaa;
+    }
+
+    .summary-value {
+      color: #d4af37;
+      font-weight: 600;
+    }
+
+    /* BUTTON */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #c89a5a, #d4af37);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05em;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(200, 154, 90, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* MESSAGE */
+    .message {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .message.success {
+      background: rgba(76, 175, 80, 0.2);
+      border-left: 4px solid #4caf50;
+      color: #a8d5a8;
+      display: block;
+    }
+
+    .message.error {
+      background: rgba(244, 67, 54, 0.2);
+      border-left: 4px solid #f44336;
+      color: #f1a9a7;
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hours-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .booking-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hours-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-container">
+    <h1>📅 Umów się na spotkanie</h1>
+    <p class="subtitle">Wybierz wygodny dla Ciebie termin i godzinę konsultacji</p>
+
+    <div id="message" class="message"></div>
+
+    <div class="booking-grid">
+      <!-- KALENDARZ -->
+      <div class="calendar-section">
+        <h2>Wybierz datę</h2>
+
+        <div class="calendar-nav">
+          <button id="prevMonth">← Poprzedni</button>
+          <span class="calendar-month" id="monthYear"></span>
+          <button id="nextMonth">Następny →</button>
+        </div>
+
+        <div class="weekdays">
+          <div class="weekday">Pon</div>
+          <div class="weekday">Wto</div>
+          <div class="weekday">Śro</div>
+          <div class="weekday">Czw</div>
+          <div class="weekday">Pią</div>
+          <div class="weekday">Sob</div>
+          <div class="weekday">Nie</div>
+        </div>
+
+        <div class="days" id="daysContainer"></div>
+
+        <!-- GODZINY -->
+        <div class="hours-section">
+          <h3>Wybierz godzinę (2 godziny)</h3>
+          <div class="hours-grid" id="hoursContainer">
+            <!-- Godziny będą wygenerowane JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARZ -->
+      <div class="form-section">
+        <h2>Twoje dane</h2>
+
+        <div class="summary" id="summary" style="display: none;">
+          <div class="summary-item">
+            <span class="summary-label">Wybrana data:</span>
+            <span class="summary-value" id="selectedDate">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Godzina spotkania:</span>
+            <span class="summary-value" id="selectedTime">-</span>
+          </div>
+        </div>
+
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Imię *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nazwisko *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Adres *</label>
+            <input type="text" id="address" name="address" placeholder="Ulica, nr domu, kod pocztowy, miasto" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="phone" pattern="[0-9\s\-\+]+" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="projectType">Typ projektu *</label>
+            <select id="projectType" name="projectType" required>
+              <option value="">-- Wybierz --</option>
+              <option value="kuchnia">Kuchnia na wymiar</option>
+              <option value="szafa">Szafa/Garderoba</option>
+              <option value="zabudowa">Zabudowa przedpokoju</option>
+              <option value="inne">Inne</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Opis projektu *</label>
+            <textarea id="description" name="description" placeholder="Opisz swój projekt, wymiary, pomysły..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Załącznik (plik, zdjęcie, plan)</label>
+            <div class="file-upload">
+              <input type="file" id="fileUpload" name="file" accept="image/*,.pdf,.doc,.docx">
+              <label for="fileUpload" class="file-upload-btn">📎 Kliknij aby wybrać plik lub przeciągnij tutaj</label>
+              <div class="file-name" id="fileName"></div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Zarezerwuj spotkanie</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedDate = null;
+    let selectedTime = null;
+    let currentMonth = new Date();
+    const bookings = {}; // Przechowywanie zarezerwowanych godzin
+
+    // === KALENDARZ ===
+    function renderCalendar() {
+      const year = currentMonth.getFullYear();
+      const month = currentMonth.getMonth();
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const startDate = firstDay.getDay() || 7; // 1-7 (pon-nie)
+
+      // Update header
+      const monthNames = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+      document.getElementById('monthYear').textContent = `${monthNames[month]} ${year}`;
+
+      // Clear days
+      const daysContainer = document.getElementById('daysContainer');
+      daysContainer.innerHTML = '';
+
+      // Empty cells
+      for (let i = 1; i < startDate; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'day disabled';
+        daysContainer.appendChild(emptyDay);
+      }
+
+      // Days
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        const date = new Date(year, month, day);
+        const dayName = date.getDay();
+        
+        dayDiv.textContent = day;
+        dayDiv.className = 'day';
+
+        // Niedziela = 0, wyłącz
+        if (dayName === 0) {
+          dayDiv.classList.add('disabled');
+        } else {
+          // Przeszłe daty - wyłącz
+          if (date < new Date(new Date().setHours(0, 0, 0, 0))) {
+            dayDiv.classList.add('disabled');
+          } else {
+            dayDiv.addEventListener('click', () => selectDate(date, dayDiv));
+          }
+        }
+
+        daysContainer.appendChild(dayDiv);
+      }
+    }
+
+    function selectDate(date, element) {
+      // Remove previous selection
+      document.querySelectorAll('.day.selected').forEach(d => d.classList.remove('selected'));
+      
+      element.classList.add('selected');
+      selectedDate = date;
+      selectedTime = null;
+
+      // Clear hours
+      document.querySelectorAll('.hour.selected').forEach(h => h.classList.remove('selected'));
+      renderHours();
+      updateSummary();
+    }
+
+    // === GODZINY ===
+    function renderHours() {
+      const hoursContainer = document.getElementById('hoursContainer');
+      hoursContainer.innerHTML = '';
+
+      if (!selectedDate) {
+        hoursContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #aaa;">Wybierz datę</p>';
+        return;
+      }
+
+      const startHour = 9;
+      const endHour = 20;
+
+      for (let hour = startHour; hour < endHour; hour++) {
+        const timeString = `${String(hour).padStart(2, '0')}:00`;
+        const hourDiv = document.createElement('div');
+        hourDiv.className = 'hour';
+        hourDiv.textContent = timeString;
+
+        // Check if booked
+        const dateKey = selectedDate.toISOString().split('T')[0];
+        if (bookings[dateKey] && bookings[dateKey].includes(hour)) {
+          hourDiv.classList.add('booked');
+        } else {
+          hourDiv.addEventListener('click', () => {
+            document.querySelectorAll('.hour.selected').forEach(h => h.classList.remove('selected'));
+            hourDiv.classList.add('selected');
+            selectedTime = hour;
+            updateSummary();
+          });
+        }
+
+        hoursContainer.appendChild(hourDiv);
+      }
+    }
+
+    // === SUMMARY ===
+    function updateSummary() {
+      const summary = document.getElementById('summary');
+      if (selectedDate && selectedTime !== null) {
+        summary.style.display = 'block';
+        const dateStr = selectedDate.toLocaleDateString('pl-PL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const timeStr = `${String(selectedTime).padStart(2, '0')}:00 - ${String(selectedTime + 2).padStart(2, '0')}:00`;
+        document.getElementById('selectedDate').textContent = dateStr;
+        document.getElementById('selectedTime').textContent = timeStr;
+      } else {
+        summary.style.display = 'none';
+      }
+    }
+
+    // === FILE UPLOAD ===
+    document.getElementById('fileUpload').addEventListener('change', (e) => {
+      const fileName = e.target.files[0]?.name || '';
+      document.getElementById('fileName').textContent = fileName ? `📄 ${fileName}` : '';
+    });
+
+    // === FORM SUBMIT ===
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!selectedDate || selectedTime === null) {
+        showMessage('Proszę wybrać datę i godzinę', 'error');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('firstName', document.getElementById('firstName').value);
+      formData.append('lastName', document.getElementById('lastName').value);
+      formData.append('address', document.getElementById('address').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('phone', document.getElementById('phone').value);
+      formData.append('projectType', document.getElementById('projectType').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('date', selectedDate.toISOString().split('T')[0]);
+      formData.append('time', selectedTime);
+      
+      if (document.getElementById('fileUpload').files[0]) {
+        formData.append('file', document.getElementById('fileUpload').files[0]);
+      }
+
+      try {
+        const response = await fetch('https://threep-projekt-ai-chatbot.onrender.com/api/booking', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showMessage('✅ Rezerwacja wysłana! Potwierdzenie otrzymasz na email.', 'success');
+          document.getElementById('bookingForm').reset();
+          document.getElementById('fileName').textContent = '';
+          selectedDate = null;
+          selectedTime = null;
+          document.querySelectorAll('.day.selected, .hour.selected').forEach(el => el.classList.remove('selected'));
+          updateSummary();
+          renderHours();
+          
+          // Dodaj do lokalnych rezerwacji
+          const dateKey = selectedDate?.toISOString().split('T')[0];
+          if (dateKey) {
+            if (!bookings[dateKey]) bookings[dateKey] = [];
+            bookings[dateKey].push(selectedTime);
+          }
+        } else {
+          showMessage('❌ ' + (data.error || 'Błąd rezerwacji'), 'error');
+        }
+      } catch (error) {
+        showMessage('❌ Błąd połączenia: ' + error.message, 'error');
+      }
+    });
+
+    function showMessage(text, type) {
+      const msgEl = document.getElementById('message');
+      msgEl.textContent = text;
+      msgEl.className = `message ${type}`;
+      setTimeout(() => {
+        msgEl.className = 'message';
+      }, 5000);
+    }
+
+    // === NAVIGATION ===
+    document.getElementById('prevMonth').addEventListener('click', () => {
+      currentMonth.setMonth(currentMonth.getMonth() - 1);
+      renderCalendar();
+      selectedDate = null;
+      selectedTime = null;
+      updateSummary();
+      renderHours();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', () => {
+      currentMonth.setMonth(currentMonth.getMonth() + 1);
+      renderCalendar();
+      selectedDate = null;
+      selectedTime = null;
+      updateSummary();
+      renderHours();
+    });
+
+    // === INIT ===
+    renderCalendar();
+    renderHours();
+  </script>
+</body>
+</html>

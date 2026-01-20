@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin | 3P PROJEKT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #fff;
+    }
+
+    /* LOGIN PAGE */
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(35,35,35,0.95));
+      border: 2px solid #c89a5a;
+      border-radius: 20px;
+      padding: 50px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-box h1 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #d4af37, #c89a5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-box p {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #c89a5a;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(200, 154, 90, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #c89a5a;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 10px rgba(200, 154, 90, 0.3);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #c89a5a, #d4af37);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 700;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(200, 154, 90, 0.4);
+    }
+
+    .error-msg {
+      background: rgba(244, 67, 54, 0.2);
+      border-left: 4px solid #f44336;
+      color: #f1a9a7;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    /* DASHBOARD */
+    .admin-dashboard {
+      display: none;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(200, 154, 90, 0.2);
+    }
+
+    .header h1 {
+      font-size: 2em;
+      background: linear-gradient(135deg, #d4af37, #c89a5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logout-btn {
+      padding: 10px 20px;
+      background: #c89a5a;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #d4af37;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid rgba(200, 154, 90, 0.2);
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: transparent;
+      color: #aaa;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-size: 1em;
+    }
+
+    .tab-btn.active {
+      color: #d4af37;
+      border-bottom-color: #d4af37;
+    }
+
+    .tab-btn:hover {
+      color: #c89a5a;
+    }
+
+    /* TAB CONTENT */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* REZERWACJE */
+    .bookings-table {
+      background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(35,35,35,0.95));
+      border: 1px solid rgba(200, 154, 90, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: rgba(200, 154, 90, 0.1);
+      color: #d4af37;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid rgba(200, 154, 90, 0.2);
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(200, 154, 90, 0.1);
+    }
+
+    tr:hover {
+      background: rgba(200, 154, 90, 0.05);
+    }
+
+    .booking-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85em;
+      transition: all 0.3s;
+    }
+
+    .btn-confirm {
+      background: rgba(76, 175, 80, 0.2);
+      color: #a8d5a8;
+      border: 1px solid #4caf50;
+    }
+
+    .btn-confirm:hover {
+      background: rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-reject {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f1a9a7;
+      border: 1px solid #f44336;
+    }
+
+    .btn-reject:hover {
+      background: rgba(244, 67, 54, 0.4);
+    }
+
+    /* SCHEDULE */
+    .schedule-section {
+      background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(35,35,35,0.95));
+      border: 1px solid rgba(200, 154, 90, 0.2);
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .schedule-section h2 {
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .day-card {
+      background: rgba(200, 154, 90, 0.05);
+      border: 2px solid rgba(200, 154, 90, 0.2);
+      border-radius: 10px;
+      padding: 15px;
+      transition: all 0.3s;
+    }
+
+    .day-card:hover {
+      border-color: #c89a5a;
+      background: rgba(200, 154, 90, 0.1);
+    }
+
+    .day-card h3 {
+      color: #c89a5a;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+
+    .day-card input {
+      width: 100%;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(200, 154, 90, 0.3);
+      border-radius: 5px;
+      color: #fff;
+      margin-bottom: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .day-status {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .day-status label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .day-status input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+
+    .save-btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #c89a5a, #d4af37);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(200, 154, 90, 0.4);
+    }
+
+    /* MESSAGE */
+    .message {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .message.success {
+      background: rgba(76, 175, 80, 0.2);
+      border-left: 3px solid #4caf50;
+      color: #a8d5a8;
+    }
+
+    .message.error {
+      background: rgba(244, 67, 54, 0.2);
+      border-left: 3px solid #f44336;
+      color: #f1a9a7;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #aaa;
+    }
+
+    .empty-state p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .tabs {
+        flex-wrap: wrap;
+      }
+
+      table {
+        font-size: 0.9em;
+      }
+
+      td, th {
+        padding: 10px 8px;
+      }
+
+      .schedule-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <h1>🔒 Panel Admin</h1>
+      <p>3P PROJEKT - Zarządzanie rezerwacjami</p>
+      <div id="loginError" class="error-msg"></div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="password">Hasło</label>
+          <input type="password" id="password" required autofocus>
+        </div>
+        <button type="submit" class="login-btn">Zaloguj się</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="admin-dashboard">
+    <div class="dashboard-container">
+      <div class="header">
+        <h1>📊 Panel Administracyjny</h1>
+        <button class="logout-btn" id="logoutBtn">Wyloguj się</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="bookings">📅 Rezerwacje</button>
+        <button class="tab-btn" data-tab="schedule">⏰ Harmonogram</button>
+      </div>
+
+      <!-- TAB: REZERWACJE -->
+      <div id="bookings" class="tab-content active">
+        <div id="bookingMessage" class="message"></div>
+        <div class="bookings-table">
+          <table id="bookingsTable">
+            <thead>
+              <tr>
+                <th>Data/Godzina</th>
+                <th>Klient</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>Projekt</th>
+                <th>Status</th>
+                <th>Akcje</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsList">
+            </tbody>
+          </table>
+          <div id="emptyBookings" class="empty-state">
+            <p>📭 Brak rezerwacji</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: HARMONOGRAM -->
+      <div id="schedule" class="tab-content">
+        <div id="scheduleMessage" class="message"></div>
+        <div class="schedule-section">
+          <h2>Ustaw dostępne godziny</h2>
+          <p style="color: #aaa; margin-bottom: 20px;">Godziny: 9:00-20:00, Czas sesji: 2 godziny</p>
+          
+          <div class="schedule-grid">
+            <div class="day-card">
+              <h3>Poniedziałek</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="monday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="monday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+
+            <div class="day-card">
+              <h3>Wtorek</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="tuesday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="tuesday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+
+            <div class="day-card">
+              <h3>Środa</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="wednesday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="wednesday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+
+            <div class="day-card">
+              <h3>Czwartek</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="thursday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="thursday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+
+            <div class="day-card">
+              <h3>Piątek</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="friday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="friday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+
+            <div class="day-card">
+              <h3>Sobota</h3>
+              <input type="text" placeholder="np. 9:00-12:00, 15:00-18:00" data-day="saturday">
+              <div class="day-status">
+                <label>
+                  <input type="checkbox" class="day-active" data-day="saturday" checked>
+                  Dostępny
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button class="save-btn" id="saveScheduleBtn">Zapisz harmonogram</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://threep-projekt-ai-chatbot.onrender.com';
+    let authToken = null;
+
+    // === LOGIN ===
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch(`${API_URL}/api/admin/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          authToken = data.token;
+          localStorage.setItem('authToken', authToken);
+          showLoginPage(false);
+          loadBookings();
+          loadSchedule();
+        } else {
+          showError(data.error || 'Błędne hasło', 'loginError');
+        }
+      } catch (error) {
+        showError('Błąd połączenia: ' + error.message, 'loginError');
+      }
+    });
+
+    // === LOGOUT ===
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      authToken = null;
+      localStorage.removeItem('authToken');
+      showLoginPage(true);
+    });
+
+    // === LOAD BOOKINGS ===
+    async function loadBookings() {
+      try {
+        const response = await fetch(`${API_URL}/api/admin/bookings`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          renderBookings(data.bookings || []);
+        }
+      } catch (error) {
+        console.error('Błąd ładowania rezerwacji:', error);
+      }
+    }
+
+    function renderBookings(bookings) {
+      const tbody = document.getElementById('bookingsList');
+      const empty = document.getElementById('emptyBookings');
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      tbody.innerHTML = bookings.map(b => `
+        <tr>
+          <td>${new Date(b.date + 'T' + String(b.time).padStart(2, '0') + ':00').toLocaleDateString('pl-PL')} o ${String(b.time).padStart(2, '0')}:00</td>
+          <td>${b.firstName} ${b.lastName}</td>
+          <td>${b.email}</td>
+          <td>${b.phone}</td>
+          <td>${b.projectType}</td>
+          <td><span style="color: ${b.status === 'confirmed' ? '#4caf50' : '#ff9800'}">${b.status === 'confirmed' ? '✓ Potwierdzona' : '⏳ Oczekuje'}</span></td>
+          <td class="booking-actions">
+            <button class="btn-small btn-confirm" onclick="confirmBooking('${b._id}')">Potwierdź</button>
+            <button class="btn-small btn-reject" onclick="rejectBooking('${b._id}')">Odrzuć</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // === LOAD SCHEDULE ===
+    async function loadSchedule() {
+      try {
+        const response = await fetch(`${API_URL}/api/admin/schedule`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.schedule) {
+          Object.keys(data.schedule).forEach(day => {
+            const input = document.querySelector(`input[data-day="${day}"]`);
+            const checkbox = document.querySelector(`input.day-active[data-day="${day}"]`);
+            if (input) input.value = data.schedule[day].hours || '';
+            if (checkbox) checkbox.checked = data.schedule[day].active !== false;
+          });
+        }
+      } catch (error) {
+        console.error('Błąd ładowania harmonogramu:', error);
+      }
+    }
+
+    // === SAVE SCHEDULE ===
+    document.getElementById('saveScheduleBtn').addEventListener('click', async () => {
+      const schedule = {};
+      document.querySelectorAll('input[data-day]').forEach(input => {
+        const day = input.dataset.day;
+        const hours = input.value;
+        const active = document.querySelector(`input.day-active[data-day="${day}"]`).checked;
+        schedule[day] = { hours, active };
+      });
+
+      try {
+        const response = await fetch(`${API_URL}/api/admin/schedule`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: JSON.stringify({ schedule })
+        });
+
+        if (response.ok) {
+          showMessage('✅ Harmonogram zapisany', 'success', 'scheduleMessage');
+        } else {
+          showMessage('❌ Błąd podczas zapisywania', 'error', 'scheduleMessage');
+        }
+      } catch (error) {
+        showMessage('❌ Błąd połączenia', 'error', 'scheduleMessage');
+      }
+    });
+
+    // === CONFIRM/REJECT BOOKING ===
+    async function confirmBooking(id) {
+      await updateBookingStatus(id, 'confirmed');
+    }
+
+    async function rejectBooking(id) {
+      await updateBookingStatus(id, 'rejected');
+    }
+
+    async function updateBookingStatus(id, status) {
+      try {
+        const response = await fetch(`${API_URL}/api/admin/booking/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: JSON.stringify({ status })
+        });
+
+        if (response.ok) {
+          loadBookings();
+        }
+      } catch (error) {
+        console.error('Błąd:', error);
+      }
+    }
+
+    // === UI HELPERS ===
+    function showLoginPage(show) {
+      document.getElementById('loginPage').style.display = show ? 'flex' : 'none';
+      document.getElementById('dashboard').style.display = show ? 'none' : 'block';
+    }
+
+    function showError(msg, elementId) {
+      const el = document.getElementById(elementId);
+      el.textContent = msg;
+      el.style.display = 'block';
+      setTimeout(() => el.style.display = 'none', 5000);
+    }
+
+    function showMessage(msg, type, elementId) {
+      const el = document.getElementById(elementId);
+      el.textContent = msg;
+      el.className = `message ${type}`;
+      setTimeout(() => el.className = 'message', 5000);
+    }
+
+    // === TABS ===
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+      });
+    });
+
+    // === INIT ===
+    authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      showLoginPage(false);
+      loadBookings();
+      loadSchedule();
+    } else {
+      showLoginPage(true);
+    }
+  </script>
+</body>
+</html>

@@ -61,7 +61,7 @@ async function sendEmail(to, subject, html) {
     }
 
     const response = await resend.emails.send({
-      from: 'noreply@3p-projekt.pl',
+      from: 'onboarding@resend.dev',
       to: to,
       subject: subject,
       html: html

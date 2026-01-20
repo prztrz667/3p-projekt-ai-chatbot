@@ -18,7 +18,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const corsOptions = {
   origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://3p-projekt.pl', 'https://www.3p-projekt.pl', 'https://threep-projekt-ai-chatbot.onrender.com'],
   credentials: true,
-  methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 

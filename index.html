@@ -78,6 +78,7 @@
       <li><a href="#visuals">Wizualizacje</a></li>
       <li><a href="#portfolio">Realizacje</a></li>
       <li><a href="/blog.html">Strefa Porad</a></li>
+      <li><a href="/booking.html">📅 Rezerwacja</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
   </div>
@@ -690,6 +691,89 @@
     input.value = '';
   }
 </script>
+
+<!-- FLOATING BOOKING BUTTON -->
+<a href="/booking.html" class="floating-booking-btn" title="Umów się na spotkanie">
+  <span class="fab-icon">📅</span>
+  <span class="fab-text">Umów się</span>
+</a>
+
+<style>
+.floating-booking-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #c89a5a, #d4af37);
+  color: #000;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(200, 154, 90, 0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
+  font-size: 1.8em;
+  animation: floatingPulse 2s ease-in-out infinite;
+}
+
+.floating-booking-btn:hover {
+  width: 180px;
+  height: 70px;
+  border-radius: 35px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.floating-booking-btn .fab-icon {
+  font-size: 1.8em;
+  display: block;
+}
+
+.floating-booking-btn .fab-text {
+  display: none;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.floating-booking-btn:hover .fab-text {
+  display: block;
+}
+
+@keyframes floatingPulse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-booking-btn:hover {
+  animation: none;
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(200, 154, 90, 0.6);
+}
+
+@media (max-width: 768px) {
+  .floating-booking-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 65px;
+    height: 65px;
+    font-size: 1.6em;
+  }
+
+  .floating-booking-btn:hover {
+    width: 160px;
+    height: 65px;
+    border-radius: 32px;
+  }
+}
+</style>
 
 </body>
 </html>

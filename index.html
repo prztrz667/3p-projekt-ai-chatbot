@@ -645,7 +645,7 @@
     chat.scrollTop = chat.scrollHeight;
 
     // Wyślij do backendu
-    fetch('/api/chat', {
+    fetch('https://threep-projekt-ai-chatbot.onrender.com/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

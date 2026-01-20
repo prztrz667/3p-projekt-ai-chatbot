@@ -145,8 +145,9 @@ app.post('/api/booking', upload.single('file'), async (req, res) => {
   try {
     const { firstName, lastName, address, email, phone, projectType, meetingType, description, date, time } = req.body;
 
-    if (!firstName || !lastName || !email || !phone || !date || !time || !meetingType) {
-      return res.status(400).json({ error: 'Brakuje wymaganych pól' });
+    // Wymagane pola: imię, nazwisko, email, telefon, data, godzina
+    if (!firstName || !lastName || !email || !phone || !date || !time) {
+      return res.status(400).json({ error: 'Brakuje wymaganych pól: imię, nazwisko, email, telefon' });
     }
 
     const db = loadDatabase();

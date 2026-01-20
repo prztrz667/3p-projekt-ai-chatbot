@@ -258,20 +258,21 @@
     }
 
     .form-group select option {
-      background: #2a2a2a;
+      background: #1a1a1a;
       color: #fff;
-      padding: 8px;
+      padding: 10px;
+      border: none;
     }
 
-    .form-group select option:hover {
-      background: #c89a5a;
-      color: #000;
+    .form-group select option:hover,
+    .form-group select option:focus {
+      background: #c89a5a !important;
+      color: #000 !important;
     }
 
     .form-group select option:checked {
-      background: linear-gradient(#c89a5a, #c89a5a);
-      background-color: #c89a5a;
-      color: #000;
+      background: #c89a5a !important;
+      color: #000 !important;
     }
 
     .form-group textarea {
@@ -527,8 +528,8 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="meetingType">Typ spotkania *</label>
-              <select id="meetingType" name="meetingType" required>
+              <label for="meetingType">Typ spotkania</label>
+              <select id="meetingType" name="meetingType">
                 <option value="">-- Wybierz --</option>
                 <option value="telefon">📞 Telefonicznie</option>
                 <option value="online">💻 Online (Zoom/Teams)</option>
@@ -536,8 +537,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="projectType">Typ projektu *</label>
-              <select id="projectType" name="projectType" required>
+              <label for="projectType">Typ projektu</label>
+              <select id="projectType" name="projectType">
                 <option value="">-- Wybierz --</option>
                 <option value="kuchnia">Kuchnia na wymiar</option>
                 <option value="szafa">Szafa/Garderoba</option>
@@ -548,8 +549,8 @@
           </div>
 
           <div class="form-group">
-            <label for="description">Opis projektu *</label>
-            <textarea id="description" name="description" placeholder="Opisz swój projekt, wymiary, pomysły..." required></textarea>
+            <label for="description">Opis projektu</label>
+            <textarea id="description" name="description" placeholder="Opisz swój projekt, wymiary, pomysły..."></textarea>
           </div>
 
           <div class="form-group">
